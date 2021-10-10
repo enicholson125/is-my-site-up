@@ -1,7 +1,7 @@
 # is-my-site-up
 
 This pings a URL and emails you if it doesn't return 200.
-It is packaged into a Google Cloud Function that by default runs every day.
+It is packaged into a Terraform module that creates a Google Cloud Function that by default runs every day.
 
 ## Setup
 
@@ -40,5 +40,5 @@ module "cheatsheet" {
 
 Run `terraform plan` and `terraform apply` to create the Cloud Function.
 
-You will then need to manually create the Gmail password secret in Cloud Secrets and add it to the Cloud function by following [this documentation](https://cloud.google.com/functions/docs/configuring/secrets#making_a_secret_accessible_to_a_function) (add it as an environment variable called `GMAIL_PASSWORD`). It's not currently possible to set that in the terraform and it doesn't persist across recreating the terraform version of the cloud function, which is a shame.
+You will then need to manually create the Gmail password secret in Cloud Secrets and add it to the Cloud function by following [this documentation](https://cloud.google.com/functions/docs/configuring/secrets#making_a_secret_accessible_to_a_function) (add it as an environment variable called `GMAIL_PASSWORD`). It's not currently possible to set that in the terraform and it doesn't persist across recreating the terraform version of the cloud function, which is a shame, as it makes it being a terraform module a bit pointless...
 
