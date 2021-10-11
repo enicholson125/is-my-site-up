@@ -1,7 +1,7 @@
 # is-my-site-up
 
 This pings a URL and emails you if it doesn't return 200.
-It is packaged into a Terraform module that creates a Google Cloud Function that by default runs every day.
+It is packaged into a Terraform module that creates a Google Cloud Function that by default runs every day. The resources created by the module, run at the default once a day frequency, are within the Google free tier.
 
 ## Setup
 
@@ -24,7 +24,7 @@ It is packaged into a Terraform module that creates a Google Cloud Function that
 ### Run the Terraform
 
  - You will need the Cloud Functions, Cloud Scheduler and Cloud Build APIs enabled to run the terraform. Terraform prompts you to enable them so personally I keep applying and clicking through on the enable links until it works
- - You will need to create an App Engine instance
+ - You will need to create an App Engine instance (don't run any actual code on it if you want to stay in the Google free tier)
 
 Invoke the module in your terraform, e.g.
 
@@ -40,5 +40,5 @@ module "cheatsheet" {
 
 Run `terraform plan` and `terraform apply` to create the Cloud Function.
 
-You will then need to manually create the Gmail password secret in Cloud Secrets and add it to the Cloud function by following [this documentation](https://cloud.google.com/functions/docs/configuring/secrets#making_a_secret_accessible_to_a_function) (add it as an environment variable called `GMAIL_PASSWORD`). It's not currently possible to set that in the terraform and it doesn't persist across recreating the terraform version of the cloud function, which is a shame, as it makes it being a terraform module a bit pointless...
+You will then need to manually create the Gmail password secret in Cloud Secrets and add it to the Cloud function by following [this documentation](https://cloud.google.com/functions/docs/configuring/secrets#making_a_secret_accessible_to_a_function) (add it as an environment variable called `GMAIL_PASSWORD`). It's not currently possible to configure that in the terraform cloud function definition but it hopefully will be soon.
 
